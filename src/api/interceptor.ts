@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Message, Modal } from '@arco-design/web-vue';
 import { useUserStore } from '@/store';
-import { getToken } from '@/utils/auth';
+import { getToken, setToken } from '@/utils/auth';
 
 export interface HttpResponse<T = unknown> {
   status: number;
@@ -38,9 +38,19 @@ axios.interceptors.request.use(
 // add response interceptors
 axios.interceptors.response.use(
   (response: AxiosResponse<HttpResponse>) => {
+    // 获取token保存到本地
+    // @ts-ignore
+    // const token = response.headers.get('Authorization')?.slice('Bearer ');
+    const token = response.headers?.Authorization; // 当请求头中返回token的时候进行token更新
+    // console.log(response.headers);
+    if (token) {
+      // Set the token using the setToken function
+      setToken(token);
+    }
     const res = response.data;
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 20000) {
+      console.log(res.code);
       Message.error({
         content: res.msg || 'Error',
         duration: 5 * 1000,

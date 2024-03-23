@@ -1,4 +1,7 @@
 export default {
+  'menu.comp': '组件管理',
+  'menu.comp.createComp': '创建组件',
+  'menu.comp.myComp': '我的组件',
   'menu.dashboard.workplace': '工作台',
   'workplace.welcome': '欢迎回来！',
   'workplace.balance': '余额（元）',
