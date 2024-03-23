@@ -1,4 +1,5 @@
 export default {
+  'menu.comp.createComp': '创建组件',
   'menu.form.step': '分步表单',
   'stepForm.step.title': '创建渠道表单',
   'stepForm.step.title.baseInfo': '选择基本信息',

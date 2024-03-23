@@ -1,4 +1,5 @@
 export default {
+  'menu.comp.compCreate': 'create component',
   'menu.form.step': 'Step Form',
   'stepForm.step.title': 'Create Channel Forms',
   'stepForm.step.title.baseInfo': 'Select Basic Information',

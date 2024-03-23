@@ -55,7 +55,7 @@
         <a-button type="primary" html-type="submit" long :loading="loading">
           {{ $t('login.form.login') }}
         </a-button>
-        <a-button type="text" long class="login-form-register-btn">
+        <a-button @click="emits('register')" type="text" long class="login-form-register-btn">
           {{ $t('login.form.register') }}
         </a-button>
       </a-space>
@@ -73,6 +73,8 @@
   import { useUserStore } from '@/store';
   import useLoading from '@/hooks/loading';
   import type { LoginData } from '@/api/user';
+
+  const emits = defineEmits(['register']);
 
   const router = useRouter();
   const { t } = useI18n();
@@ -104,7 +106,7 @@
         await userStore.login(values as LoginData);
         const { redirect, ...othersQuery } = router.currentRoute.value.query;
         router.push({
-          name: (redirect as string) || 'Workplace',
+          name: (redirect as string) || 'myComp',
           query: {
             ...othersQuery,
           },

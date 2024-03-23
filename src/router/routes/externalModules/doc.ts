@@ -1,8 +1,8 @@
 export default {
-  path: 'https://arco.design/vue/docs/pro/faq',
-  name: 'faq',
+  path: import.meta.env.VITE_API_DOC_URL, // 文档地址
+  name: 'doc',
   meta: {
-    locale: 'menu.faq',
+    locale: 'menu.doc',
     icon: 'icon-question-circle',
     requiresAuth: true,
     order: 9,

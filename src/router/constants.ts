@@ -12,7 +12,8 @@ export const REDIRECT_ROUTE_NAME = 'Redirect';
 export const DEFAULT_ROUTE_NAME = 'Workplace';
 
 export const DEFAULT_ROUTE = {
-  title: 'menu.dashboard.workplace',
+  title: 'menu.comp.myComp',
   name: DEFAULT_ROUTE_NAME,
-  fullPath: '/dashboard/workplace',
+  fullPath: '/comp/myComp',
+  // fullPath: '/dashboard/workplace',
 };

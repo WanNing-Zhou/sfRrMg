@@ -10,7 +10,8 @@
     <LoginBanner />
     <div class="content">
       <div class="content-inner">
-        <LoginForm />
+        <LoginForm v-if="!registerFromVisible" @register="registerCallback" />
+        <RegisterForm v-if="registerFromVisible" />
       </div>
       <div class="footer">
         <Footer />
@@ -20,9 +21,20 @@
 </template>
 
 <script lang="ts" setup>
+  import { ref } from 'vue';
   import Footer from '@/components/footer/index.vue';
+  import RegisterForm from '@/views/login/components/register-form.vue';
   import LoginBanner from './components/banner.vue';
   import LoginForm from './components/login-form.vue';
+
+
+  // 注册表单显示
+  const registerFromVisible = ref(false);
+
+  // 注册按钮点击回调
+  const registerCallback = () => {
+    registerFromVisible.value = true;
+  };
 </script>
 
 <style lang="less" scoped>

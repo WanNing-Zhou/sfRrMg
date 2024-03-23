@@ -1,12 +1,11 @@
 import localeMessageBox from '@/components/message-box/locale/zh-CN';
 import localeLogin from '@/views/login/locale/zh-CN';
 
-import localeWorkplace from '@/views/dashboard/workplace/locale/zh-CN';
-
-import localeMonitor from '@/views/dashboard/monitor/locale/zh-CN';
-
 import localeSearchTable from '@/views/list/search-table/locale/zh-CN';
 import localeCardList from '@/views/list/card/locale/zh-CN';
+
+import localeMyComp from '@/views/comp/myComp/locale/zh-CN'
+import localeCompCreate from '@/views/comp/compCreate/locale/zh-CN'
 
 import localeStepForm from '@/views/form/step/locale/zh-CN';
 import localeGroupForm from '@/views/form/group/locale/zh-CN';
@@ -44,12 +43,11 @@ export default {
   'menu.faq': '常见问题',
   'navbar.docs': '文档中心',
   'navbar.action.locale': '切换为中文',
+  ...localeMyComp,
+  ...localeCompCreate,
   ...localeSettings,
   ...localeMessageBox,
   ...localeLogin,
-  ...localeWorkplace,
-
-  ...localeMonitor,
   ...localeSearchTable,
   ...localeCardList,
   ...localeStepForm,
