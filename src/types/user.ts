@@ -1,21 +1,32 @@
-export type RoleType = '' | '*' | 'admin' | 'user';
-export interface UserState {
-  id?: string;
+export type UserInfo = {
+  // 姓名
   name?: string;
+  // 头像URL
   avatar?: string;
+  // 职业
   job?: string;
+  // 组织
   organization?: string;
+  // 位置
   location?: string;
+  // 邮箱
   email?: string;
-  introduction?: string;
+  // 个人网站
   personalWebsite?: string;
+  // 职位
   jobName?: string;
+  // 组织名称
   organizationName?: string;
+  // 位置名称
   locationName?: string;
+  // 手机号
   phone?: string;
+  // 注册日期
   registrationDate?: string;
+  // 账户ID
   accountId?: string;
-  certification?: number;
-  role: RoleType;
-  created_at?: string;
-}
+  // 认证
+  certification?: string;
+  // 角色
+  role?: string;
+};

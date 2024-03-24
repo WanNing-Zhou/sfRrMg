@@ -8,6 +8,7 @@
         :show-upload-button="true"
         :show-file-list="false"
         @change="uploadChange"
+        action=""
       >
         <template #upload-button>
           <a-avatar :size="100" class="info-avatar">
@@ -59,12 +60,13 @@
   import { useUserStore } from '@/store';
   import { userUploadApi } from '@/api/user-center';
   import type { DescData } from '@arco-design/web-vue/es/descriptions/interface';
+  import defaultAvatar from '@/assets/images/user-defalut-avatar.png';
 
   const userStore = useUserStore();
   const file = {
     uid: '-2',
     name: 'avatar.png',
-    url: userStore.avatar,
+    url: userStore.avatar || defaultAvatar,
   };
   const renderData = [
     {

@@ -12,4 +12,5 @@ export default {
   'userInfo.nodata': '暂无数据',
   'userInfo.visits.unit': '人次',
   'userInfo.visits.lastMonth': '较上月',
+  'userInfo.head.createTime': '创建时间',
 };

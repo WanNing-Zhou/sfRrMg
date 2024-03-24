@@ -2,16 +2,20 @@ import { defineStore } from 'pinia';
 import {
   login as userLogin,
   logout as userLogout,
+  register as userRegister,
   getUserInfo,
   LoginData,
 } from '@/api/user';
 import { setToken, clearToken } from '@/utils/auth';
 import { removeRouteListener } from '@/utils/route-listener';
+import { RegisterData } from '@/types/form';
 import { UserState } from './types';
 import useAppStore from '../app';
 
+
 const useUserStore = defineStore('user', {
   state: (): UserState => ({
+    id: undefined,
     name: undefined,
     avatar: undefined,
     job: undefined,
@@ -28,6 +32,7 @@ const useUserStore = defineStore('user', {
     accountId: undefined,
     certification: undefined,
     role: '',
+    created_at: undefined,
   }),
 
   getters: {
@@ -70,6 +75,16 @@ const useUserStore = defineStore('user', {
         throw err;
       }
     },
+    async register(registerForm: RegisterData) {
+      try {
+        const res = await userRegister(registerForm);
+        setToken(res.data.access_token);
+      } catch (err) {
+        clearToken();
+        throw err;
+      }
+    },
+
     logoutCallBack() {
       const appStore = useAppStore();
       this.resetInfo();

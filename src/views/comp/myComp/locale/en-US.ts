@@ -1,4 +1,5 @@
 export default {
+  'menu.doc': 'DOC',
   'menu.list.searchTable': 'Search Table',
   'searchTable.form.number': 'Set Number',
   'searchTable.form.number.placeholder': 'Please enter Set Number',

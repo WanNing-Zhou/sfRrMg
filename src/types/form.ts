@@ -1,7 +1,7 @@
 // 这里用来存放各种表单的类型
 
 // 用户注册
-export type Register = {
+export type RegisterData = {
   email: string;
   name: string;
   password: string;

@@ -5,7 +5,7 @@
         <template #trigger-icon>
           <icon-camera />
         </template>
-        <img :src="userInfo.avatar" />
+        <img :src="userInfo.avatar || defaultAvatar" alt="加载失败" />
       </a-avatar>
       <a-typography-title :heading="6" style="margin: 0">
         {{ userInfo.name }}
@@ -14,17 +14,32 @@
         <a-space :size="18">
           <div>
             <icon-user />
-            <a-typography-text>{{ userInfo.jobName }}</a-typography-text>
+            <a-typography-text>{{ userInfo.name }}</a-typography-text>
           </div>
           <div>
+            <icon-email />
+            <a-typography-text>{{ userInfo.email }}</a-typography-text>
+          </div>
+          <div v-if="userInfo.phone">
+            <icon-phone />
+            <a-typography-text>{{ userInfo.phone }}</a-typography-text>
+          </div>
+          <div v-if="userInfo.location">
             <icon-home />
             <a-typography-text>
-              {{ userInfo.organizationName }}
+              {{ userInfo.location }}
             </a-typography-text>
           </div>
-          <div>
+          <div v-if="userInfo.locationName">
             <icon-location />
             <a-typography-text>{{ userInfo.locationName }}</a-typography-text>
+          </div>
+          <div v-if="userInfo.created_at">
+            <icon-pen-fill />
+            <a-typography-text
+              >{{ $t('userInfo.head.createTime') }} :
+              {{ formatToDay(userInfo.created_at) }}</a-typography-text
+            >
           </div>
         </a-space>
       </div>
@@ -33,9 +48,15 @@
 </template>
 
 <script lang="ts" setup>
+  import { onMounted } from 'vue';
   import { useUserStore } from '@/store';
+  import { formatToDay } from "@/utils/day";
+  import defaultAvatar from '@/assets/images/user-defalut-avatar.png'
 
   const userInfo = useUserStore();
+  onMounted(() => {
+    userInfo.info();
+  });
 </script>
 
 <style scoped lang="less">
