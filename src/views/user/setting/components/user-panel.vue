@@ -7,8 +7,7 @@
         :file-list="fileList"
         :show-upload-button="true"
         :show-file-list="false"
-        @change="uploadChange"
-        action=""
+        @success="successHandle"
       >
         <template #upload-button>
           <a-avatar :size="100" class="info-avatar">
@@ -36,15 +35,15 @@
         }"
       >
         <template #label="{ label }">{{ $t(label) }} :</template>
-        <template #value="{ value, data }">
-          <a-tag
+        <template #value="{ value }">
+          <!--          <a-tag
             v-if="data.label === 'userSetting.label.certification'"
             color="green"
             size="small"
           >
             已认证
-          </a-tag>
-          <span v-else>{{ value }}</span>
+          </a-tag>-->
+          <span>{{ value }}</span>
         </template>
       </a-descriptions>
     </a-space>
@@ -52,7 +51,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { computed, ref } from 'vue';
   import type {
     FileItem,
     RequestOption,
@@ -61,39 +60,47 @@
   import { userUploadApi } from '@/api/user-center';
   import type { DescData } from '@arco-design/web-vue/es/descriptions/interface';
   import defaultAvatar from '@/assets/images/user-defalut-avatar.png';
+  import { formatToDay } from '@/utils/day';
 
   const userStore = useUserStore();
-  const file = {
+  // const uploadUrl = import.meta.env.VITE_API_UPLOAD_URL;
+  // console.log(uploadUrl);
+  const avatarUrl = {
     uid: '-2',
     name: 'avatar.png',
     url: userStore.avatar || defaultAvatar,
   };
+
   const renderData = [
     {
       label: 'userSetting.label.name',
       value: userStore.name,
     },
     {
-      label: 'userSetting.label.certification',
-      value: userStore.certification,
-    },
-    {
       label: 'userSetting.label.accountId',
-      value: userStore.accountId,
+      // value: userStore.accountId,
+      value: userStore.id,
     },
     {
       label: 'userSetting.label.phone',
-      value: userStore.phone,
+      value: userStore.mobile,
     },
     {
       label: 'userSetting.label.registrationDate',
-      value: userStore.registrationDate,
+      value: formatToDay(userStore.created_at),
     },
   ] as DescData[];
-  const fileList = ref<FileItem[]>([file]);
-  const uploadChange = (fileItemList: FileItem[], fileItem: FileItem) => {
-    fileList.value = [fileItem];
-  };
+  // const fileList = ref<FileItem[]>([avatarUrl]);
+
+  const fileList = computed(() => {
+    const fileItem = {
+      uid: '-2',
+      name: 'avantar',
+      url: userStore.avatar || defaultAvatar,
+    };
+    return [fileItem];
+  });
+
   const customRequest = (options: RequestOption) => {
     // docs: https://axios-http.com/docs/cancellation
     const controller = new AbortController();
@@ -125,6 +132,7 @@
           controller,
           onUploadProgress,
         });
+        // console.log('res',res);
         onSuccess(res);
       } catch (error) {
         onError(error);
@@ -135,6 +143,19 @@
         controller.abort();
       },
     };
+  };
+
+  const successHandle = async (res: any) => {
+    // fileList.value = [res.data.url]
+    const { url } = res.response.data;
+    // console.log(res);
+    userStore.$patch({
+      avatar: url,
+    });
+    console.log(userStore.avatar);
+    await userStore.updateInfo(); // 更新用户信息
+    // console.log('success', url);
+    // userStore.setInfo()
   };
 </script>
 

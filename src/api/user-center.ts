@@ -40,12 +40,13 @@ export function saveUserInfo() {
 }
 
 export interface BasicInfoModel {
-  email: string;
-  nickname: string;
-  countryRegion: string;
-  area: string;
+  name: string;
+  mobile: string;
+  countryRegion?: string;
+  area?: string;
   address: string;
-  profile: string;
+  profile?: string;
+  introduction: string;
 }
 
 export interface EnterpriseCertificationModel {
@@ -78,11 +79,13 @@ export function queryCertification() {
 
 export function userUploadApi(
   data: FormData,
-  config: {
+  config?: {
     controller: AbortController;
     onUploadProgress?: (progressEvent: any) => void;
   }
 ) {
   // const controller = new AbortController();
-  return axios.post('/api/user/upload', data, config);
+  const uploadUrl = import.meta.env.VITE_API_UPLOAD_URL;
+  // console.log('formdata', data);
+  return axios.post(uploadUrl, data);
 }

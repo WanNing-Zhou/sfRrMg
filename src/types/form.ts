@@ -12,3 +12,11 @@ export type Login = {
   email: string;
   password: string;
 }
+
+
+// 修改密码
+export type ResetPasswordData = {
+  oldPassword: string;
+  newPassword: string;
+  id: string | undefined;
+}

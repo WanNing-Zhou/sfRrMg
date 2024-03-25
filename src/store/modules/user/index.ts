@@ -5,13 +5,15 @@ import {
   register as userRegister,
   getUserInfo,
   LoginData,
+  setUserInfo,
+  confirmPassword,
 } from '@/api/user';
 import { setToken, clearToken } from '@/utils/auth';
 import { removeRouteListener } from '@/utils/route-listener';
-import { RegisterData } from '@/types/form';
+import { RegisterData, ResetPasswordData } from '@/types/form';
+import { Modal } from '@arco-design/web-vue';
 import { UserState } from './types';
 import useAppStore from '../app';
-
 
 const useUserStore = defineStore('user', {
   state: (): UserState => ({
@@ -27,7 +29,7 @@ const useUserStore = defineStore('user', {
     jobName: undefined,
     organizationName: undefined,
     locationName: undefined,
-    phone: undefined,
+    mobile: undefined,
     registrationDate: undefined,
     accountId: undefined,
     certification: undefined,
@@ -61,8 +63,20 @@ const useUserStore = defineStore('user', {
     // Get user's information
     async info() {
       const res = await getUserInfo();
-
       this.setInfo(res.data);
+    },
+
+    async updateInfo() {
+      const infoForm: any | UserState = {
+        id: this.id,
+        name: this.name,
+        introduction: this.introduction,
+        mobile: this.mobile,
+        email: this.email,
+        avatar: this.avatar,
+      };
+      const res = await setUserInfo(infoForm);
+      this.$patch(res.data);
     },
 
     // Login
@@ -98,6 +112,26 @@ const useUserStore = defineStore('user', {
         await userLogout();
       } finally {
         this.logoutCallBack();
+      }
+    },
+    //
+    async resetPassword(resetPasswordForm: {
+      oldPassword: string;
+      newPassword: string;
+    }) {
+      const form: ResetPasswordData = {
+        newPassword: resetPasswordForm.newPassword,
+        oldPassword: resetPasswordForm.oldPassword,
+        id: this.id,
+      };
+      try {
+        await confirmPassword(form);
+        Modal.success({
+          content: '修改成功',
+        });
+        await this.info()
+      } catch (err) {
+        Modal.error({ content: '修改失败' });
       }
     },
   },

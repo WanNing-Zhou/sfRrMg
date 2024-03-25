@@ -1,7 +1,7 @@
 import axios from 'axios';
 import type { RouteRecordNormalized } from 'vue-router';
 import { UserState } from '@/store/modules/user/types';
-import { RegisterData } from "@/types/form";
+import { RegisterData, ResetPasswordData } from "@/types/form";
 
 export interface LoginData {
   username: string;
@@ -30,10 +30,17 @@ export function logout() {
 }
 
 export function getUserInfo() {
-  return axios.post<UserState>('/api/auth/info');
+  return axios.get<UserState>('/api/auth/info');
 }
 
 export function getMenuList() {
   return axios.post<RouteRecordNormalized[]>('/api/user/menu');
 }
 
+export function setUserInfo(form: UserState) {
+  return axios.post<UserState>('/api/auth/info', form);
+}
+
+export function confirmPassword(from: ResetPasswordData){
+  return axios.post<UserState>( '/api/auth/password',from)
+}

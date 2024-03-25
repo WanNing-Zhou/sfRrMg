@@ -7,22 +7,13 @@
     :wrapper-col-props="{ span: 16 }"
   >
     <a-form-item
-      field="email"
-      :label="$t('userSetting.basicInfo.form.label.email')"
-      :rules="[
-        {
-          required: true,
-          message: $t('userSetting.form.error.email.required'),
-        },
-      ]"
+      field="mobile"
+      :label="$t('userSetting.basicInfo.form.label.phone')"
     >
-      <a-input
-        v-model="formData.email"
-        :placeholder="$t('userSetting.basicInfo.placeholder.email')"
-      />
+      <a-input v-model="formData.mobile" :placeholder="'请输入电话号码'" />
     </a-form-item>
     <a-form-item
-      field="nickname"
+      field="name"
       :label="$t('userSetting.basicInfo.form.label.nickname')"
       :rules="[
         {
@@ -32,83 +23,16 @@
       ]"
     >
       <a-input
-        v-model="formData.nickname"
+        v-model="formData.name"
         :placeholder="$t('userSetting.basicInfo.placeholder.nickname')"
       />
     </a-form-item>
     <a-form-item
-      field="countryRegion"
-      :label="$t('userSetting.basicInfo.form.label.countryRegion')"
-      :rules="[
-        {
-          required: true,
-          message: $t('userSetting.form.error.countryRegion.required'),
-        },
-      ]"
-    >
-      <a-select
-        v-model="formData.countryRegion"
-        :placeholder="$t('userSetting.basicInfo.placeholder.area')"
-      >
-        <a-option value="China">中国</a-option>
-      </a-select>
-    </a-form-item>
-    <a-form-item
-      field="area"
-      :label="$t('userSetting.basicInfo.form.label.area')"
-      :rules="[
-        {
-          required: true,
-          message: $t('userSetting.form.error.area.required'),
-        },
-      ]"
-    >
-      <a-cascader
-        v-model="formData.area"
-        :placeholder="$t('userSetting.basicInfo.placeholder.area')"
-        :options="[
-          {
-            label: '北京',
-            value: 'beijing',
-            children: [
-              {
-                label: '北京',
-                value: 'beijing',
-                children: [
-                  {
-                    label: '朝阳',
-                    value: 'chaoyang',
-                  },
-                ],
-              },
-            ],
-          },
-        ]"
-        allow-clear
-      />
-    </a-form-item>
-    <a-form-item
-      field="address"
-      :label="$t('userSetting.basicInfo.form.label.address')"
-    >
-      <a-input
-        v-model="formData.address"
-        :placeholder="$t('userSetting.basicInfo.placeholder.address')"
-      />
-    </a-form-item>
-    <a-form-item
-      field="profile"
       :label="$t('userSetting.basicInfo.form.label.profile')"
-      :rules="[
-        {
-          maxLength: 200,
-          message: $t('userSetting.form.error.profile.maxLength'),
-        },
-      ]"
       row-class="keep-margin"
     >
       <a-textarea
-        v-model="formData.profile"
+        v-model="formData.introduction"
         :placeholder="$t('userSetting.basicInfo.placeholder.profile')"
       />
     </a-form-item>
@@ -126,22 +50,39 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { ref, computed } from 'vue';
   import { FormInstance } from '@arco-design/web-vue/es/form';
   import { BasicInfoModel } from '@/api/user-center';
+  import { useUserStore } from '@/store';
+  import { Message, Modal } from "@arco-design/web-vue";
 
+  const userStore = useUserStore();
   const formRef = ref<FormInstance>();
-  const formData = ref<BasicInfoModel>({
-    email: '',
-    nickname: '',
-    countryRegion: '',
-    area: '',
-    address: '',
-    profile: '',
+
+  const orgData = computed(() => {
+    const { mobile, name, introduction } = userStore;
+    return {
+      mobile,
+      name,
+      introduction,
+    };
   });
+
+  const formData = ref<BasicInfoModel | any>({ ...orgData.value });
   const validate = async () => {
     const res = await formRef.value?.validate();
     if (!res) {
+      userStore.$patch({ ...formData.value });
+      try {
+        await userStore.updateInfo();
+        // formData.value = { ...orgData };
+        Message.success({
+          content: '更新成功',
+        });
+      } catch (err) {
+        Modal.error({ content: '更新失败' });
+      }
+
       // do some thing
       // you also can use html-type to submit
     }

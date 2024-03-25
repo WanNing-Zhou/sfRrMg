@@ -12,7 +12,7 @@ export interface UserState {
   jobName?: string;
   organizationName?: string;
   locationName?: string;
-  phone?: string;
+  mobile?: string;
   registrationDate?: string;
   accountId?: string;
   certification?: number;
