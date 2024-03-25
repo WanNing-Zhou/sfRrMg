@@ -14,14 +14,14 @@
             </a-typography-paragraph>
           </div>
           <div class="operation">
-            <a-link>
+            <a-link @click="linkHandle('updatePassword')">
               {{ $t('userSetting.SecuritySettings.button.update') }}
             </a-link>
           </div>
         </template>
       </a-list-item-meta>
     </a-list-item>
-    <a-list-item>
+<!--    <a-list-item>
       <a-list-item-meta>
         <template #avatar>
           <a-typography-paragraph>
@@ -85,11 +85,26 @@
           </div>
         </template>
       </a-list-item-meta>
-    </a-list-item>
+    </a-list-item>-->
+    <update-password v-model:visible="dialogs.updatePassword"></update-password>
   </a-list>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { reactive, ref } from "vue";
+import UpdatePassword from "@/views/user/setting/components/update-password.vue";
+
+const dialogs = reactive({
+  updatePassword: false
+})
+//  点击处理
+const linkHandle = (word: string) =>{
+  if (word === "updatePassword"){
+    dialogs.updatePassword = true
+  }
+}
+
+</script>
 
 <style scoped lang="less">
   :deep(.arco-list-item) {

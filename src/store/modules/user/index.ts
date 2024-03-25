@@ -11,7 +11,7 @@ import {
 import { setToken, clearToken } from '@/utils/auth';
 import { removeRouteListener } from '@/utils/route-listener';
 import { RegisterData, ResetPasswordData } from '@/types/form';
-import { Modal } from '@arco-design/web-vue';
+import { Message, Modal } from "@arco-design/web-vue";
 import { UserState } from './types';
 import useAppStore from '../app';
 
@@ -126,12 +126,11 @@ const useUserStore = defineStore('user', {
       };
       try {
         await confirmPassword(form);
-        Modal.success({
+        Message.success({
           content: '修改成功',
         });
-        await this.info()
       } catch (err) {
-        Modal.error({ content: '修改失败' });
+        Message.error({ content: '修改失败' });
       }
     },
   },
