@@ -7,27 +7,37 @@
     :wrapper-col-props="{ span: 18 }"
   >
     <a-form-item
-      field="activityName"
-      :label="$t('stepForm.form.label.activityName')"
+      field="title"
+      label="组件名称"
       :rules="[
         {
           required: true,
           message: $t('stepForm.form.error.activityName.required'),
         },
-        {
-          match: /^[a-zA-Z0-9\u4e00-\u9fa5]{1,20}$/,
-          message: $t('stepForm.form.error.activityName.pattern'),
-        },
       ]"
     >
       <a-input
-        v-model="formData.activityName"
+        v-model="formData.title"
         :placeholder="$t('stepForm.placeholder.activityName')"
       />
     </a-form-item>
     <a-form-item
-      field="channelType"
-      :label="$t('stepForm.form.label.channelType')"
+      label="预览图"
+      :rules="[{ required: true, message: '请上传预览图' }]"
+    >
+      <div style="width: 100%">
+        <wq-upload
+          v-model="formData.previewUrl"
+          width="370"
+          height="200"
+          style="margin-bottom: 20px"
+        ></wq-upload>
+        <a-input v-model="formData.previewUrl" placeholder="预览图地址" />
+      </div>
+    </a-form-item>
+    <a-form-item
+      field="deploy"
+      label="创建方式"
       :rules="[
         {
           required: true,
@@ -35,48 +45,37 @@
         },
       ]"
     >
-      <a-select
-        v-model="formData.channelType"
-        :placeholder="$t('stepForm.placeholder.channelType')"
-      >
-        <a-option>APP通用渠道</a-option>
+      <a-select v-model="formData.deploy" placeholder="请选择创建方式">
+        <a-option value="userUrl">URL创建</a-option>
+        <a-option value="uploadUrl">上传方式创建</a-option>
       </a-select>
     </a-form-item>
-    <a-form-item
-      field="promotionTime"
-      :label="$t('stepForm.form.label.promotionTime')"
-      :rules="[
-        {
-          required: true,
-          message: $t('stepForm.form.error.promotionTime.required'),
-        },
-      ]"
-    >
-      <a-range-picker v-model="formData.promotionTime" />
-    </a-form-item>
-    <a-form-item
-      field="promoteLink"
-      :label="$t('stepForm.form.label.promoteLink')"
-      :rules="[
-        {
-          required: true,
-          message: $t('stepForm.form.error.promoteLink.required'),
-        },
-        {
-          type: 'url',
-          message: $t('stepForm.form.error.promoteLink.pattern'),
-        },
-      ]"
-      row-class="keep-margin"
-    >
-      <a-input
-        v-model="formData.promoteLink"
-        :placeholder="$t('stepForm.placeholder.promoteLink')"
+
+    <a-form-item required field="column" label="默认列数">
+      <a-input-number
+        v-model="formData.column"
+        placeholder="请输入"
+        :min="1"
+        :max="24"
       />
-      <template #help>
-        <span>{{ $t('stepForm.form.tip.promoteLink') }}</span>
-      </template>
     </a-form-item>
+
+    <a-form-item required field="row" label="默认行数">
+      <a-input-number
+        v-model="formData.row"
+        placeholder="请输入"
+        :min="1"
+        :max="12"
+      />
+    </a-form-item>
+
+    <a-form-item label="详细信息" row-class="keep-margin">
+      <a-textarea
+        v-model="formData.info"
+        placeholder="这里填写组件的详细信息"
+      />
+    </a-form-item>
+
     <a-form-item>
       <a-button type="primary" @click="onNextClick">
         {{ $t('stepForm.button.next') }}
@@ -88,15 +87,18 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
   import { FormInstance } from '@arco-design/web-vue/es/form';
+  import WqUpload from '@/components/uploadComp/wqUpload.vue';
   import { BaseInfoModel } from '@/api/form';
 
   const emits = defineEmits(['changeStep']);
   const formRef = ref<FormInstance>();
-  const formData = ref<BaseInfoModel>({
-    activityName: '',
-    channelType: '',
-    promotionTime: [],
-    promoteLink: 'https://arco.design',
+  const formData = ref<BaseInfoModel | any>({
+    title: '',
+    deploy: '',
+    previewUrl: '',
+    info: '',
+    column: 1, // 组件默认占列数
+    row: 1, // 组件默认占行数
   });
 
   const onNextClick = async () => {

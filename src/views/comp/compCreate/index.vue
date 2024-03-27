@@ -14,12 +14,10 @@
             class="steps"
           >
             <a-step :description="$t('stepForm.step.subTitle.baseInfo')">
-              {{ $t('stepForm.step.title.baseInfo') }}
+              创建组件基本信息
             </a-step>
-            <a-step :description="$t('stepForm.step.subTitle.channel')">
-              {{ $t('stepForm.step.title.channel') }}
-            </a-step>
-            <a-step :description="$t('stepForm.step.subTitle.finish')">
+            <a-step description="组件设置"> 组件添加 </a-step>
+            <a-step description="完成创建">
               {{ $t('stepForm.step.title.finish') }}
             </a-step>
           </a-steps>
@@ -38,22 +36,23 @@
   import { ref } from 'vue';
   import useLoading from '@/hooks/loading';
   import {
-    submitChannelForm,
     BaseInfoModel,
     ChannelInfoModel,
     UnitChannelModel,
   } from '@/api/form';
+  import { CompInfoModel, createNewComp } from '@/api/comp';
   import BaseInfo from './components/base-info.vue';
   import ChannelInfo from './components/channel-info.vue';
   import Success from './components/success.vue';
 
   const { loading, setLoading } = useLoading(false);
   const step = ref(1);
-  const submitModel = ref<UnitChannelModel>({} as UnitChannelModel);
+  const submitModel = ref<CompInfoModel>({} as CompInfoModel);
+
   const submitForm = async () => {
     setLoading(true);
     try {
-      await submitChannelForm(submitModel.value); // The mock api default success
+      await createNewComp(submitModel.value); // The mock api default success
       step.value = 3;
       submitModel.value = {} as UnitChannelModel; // init
     } catch (err) {
@@ -62,6 +61,8 @@
       setLoading(false);
     }
   };
+
+  // 步骤改变出发
   const changeStep = (
     direction: string | number,
     model: BaseInfoModel | ChannelInfoModel

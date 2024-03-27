@@ -1,8 +1,8 @@
 export default {
-  'menu.form.step': '分步表单',
-  'stepForm.step.title': '创建渠道表单',
+  'menu.form.step': '创建组件',
+  'stepForm.step.title': '创建组件',
   'stepForm.step.title.baseInfo': '选择基本信息',
-  'stepForm.step.subTitle.baseInfo': '创建渠道活动',
+  'stepForm.step.subTitle.baseInfo': '创建组件基本信息',
   'stepForm.step.title.channel': '输入渠道信息',
   'stepForm.step.subTitle.channel': '输入详细的渠道信息',
   'stepForm.step.title.finish': '完成创建',
