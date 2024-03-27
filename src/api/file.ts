@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
 export function fileUpload(formData: any) {
-  return axios(import.meta.env.VITE_API_UPLOAD_URL,{
+  return axios(`${import.meta.env.VITE_API_UPLOAD_BASE}file`, {
     method: 'post',
     transformRequest: [
       function (data) {
@@ -14,6 +14,9 @@ export function fileUpload(formData: any) {
   });
 }
 
-export function compUpload(formData: any){
-  return ''
+export function compUpload(formData: any) {
+  return axios(`${import.meta.env.VITE_API_UPLOAD_BASE}comp`, {
+    method: 'post',
+    data: formData,
+  });
 }

@@ -25,7 +25,7 @@
     <input
       v-show="false"
       ref="fileInputDom"
-      accept="image/*"
+      :accept="accept"
       class="file_input_file"
       type="file"
       @change="uploadFileChange($event)"
@@ -40,11 +40,14 @@
   // import SvgIcon from '@/components/SvgIcon/SvgIcon.vue';
 
   type Prop = {
-    type?: 'rect' | 'circle';
-    uploadFn?: (file: File) => Promise<string | null>;
-    width?: string | number;
-    height?: string | number;
-    modelValue?: string;
+    type?: 'rect' | 'circle'; // 形状
+    suffix?: 'string'; // 后缀
+    uploadFn?: (file: File) => Promise<string | null>; // 上传方法
+    width?: string | number; // 宽度
+    height?: string | number; // 高度
+    modelValue?: string; // 地址
+    fillBgUrl?: string; // 背景填充
+    accept?: string; // 文件类型
   };
 
   const props = withDefaults(defineProps<Prop>(), {
@@ -64,6 +67,7 @@
     },
     width: '48px',
     height: '48px',
+    accept: 'image/*',
   });
 
   const emit = defineEmits<{
@@ -74,6 +78,11 @@
   let imgUrl = '';
   const defaultPhoto = computed({
     get() {
+      // 当有填充图片的时候, 使用填充图片
+      if (props.fillBgUrl && props.modelValue) {
+        return props.fillBgUrl;
+      }
+      // 否则使用默认图片
       return props.modelValue;
     },
     set(value: any) {

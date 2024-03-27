@@ -23,7 +23,7 @@
           </a-steps>
           <keep-alive>
             <BaseInfo v-if="step === 1" @change-step="changeStep" />
-            <ChannelInfo v-else-if="step === 2" @change-step="changeStep" />
+            <ChannelInfo v-else-if="step === 2" :deploy="submitModel.deploy" @change-step="changeStep" />
             <Success v-else-if="step === 3" @change-step="changeStep" />
           </keep-alive>
         </div>
