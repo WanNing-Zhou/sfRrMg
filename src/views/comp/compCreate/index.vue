@@ -54,7 +54,7 @@
     try {
       await createNewComp(submitModel.value); // The mock api default success
       step.value = 3;
-      submitModel.value = {} as UnitChannelModel; // init
+      submitModel.value = {} as CompInfoModel; // init
     } catch (err) {
       // you can report use errorHandler or other
     } finally {

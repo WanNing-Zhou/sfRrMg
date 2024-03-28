@@ -16,5 +16,20 @@ export interface CompInfoModel {
  * @param data
  */
 export function createNewComp(data: CompInfoModel) {
-  return axios.post('/api/comp', { data });
+  return axios.post('/api/comp/create', data);
+}
+
+type SearchComps = {
+  name: string; // 组件名称 (模糊查询)
+  createId: string; // 创建人id
+  page: number; // 当前页
+  pageSize: number; // 每页数量
+};
+
+/**
+ * 获取组件列表
+ * @param data
+ */
+export function getCompList(data: SearchComps) {
+  return axios.get('/api/comp/list', { params: data });
 }

@@ -15,11 +15,10 @@
     </a-space>
     <div class="details-wrapper">
       <a-typography-title :heading="6" style="margin-top: 0">
-        {{ $t('stepForm.form.description.title') }}
+        说明
       </a-typography-title>
       <a-typography-paragraph style="margin-bottom: 0">
-        {{ $t('stepForm.form.description.text') }}
-        <a-link href="link">{{ $t('stepForm.button.view') }}</a-link>
+        创建完成的组件, 需要等待管理人员进一步审核, 审核通过后, 才能使用, 感谢您的理解
       </a-typography-paragraph>
     </div>
   </div>
