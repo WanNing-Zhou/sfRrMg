@@ -38,6 +38,18 @@ export function getCompList(data: SearchComps) {
   return axios.get('/api/comp/list', { params: data });
 }
 
+/**
+ * 获取组件详情
+ * @param data
+ */
 export function getCompInfo(data: { id: string }) {
   return axios.get('/api/comp/info', { params: data });
+}
+
+/**
+ * 更新组件信息
+ * @param data
+ */
+export function updateComp(data: CompInfoModel) {
+  return axios.post('/api/comp/update', data);
 }

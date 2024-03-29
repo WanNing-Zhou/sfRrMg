@@ -179,7 +179,7 @@
 
   const userStore = useUserStore();
   const fetchData = async (
-    params: PolicyParams | any = { current: 1, pageSize: 20 },
+    params: PolicyParams | any = { current: 1, pageSize: 20 }
   ) => {
     setLoading(true);
     try {
@@ -225,6 +225,7 @@
 
   const updateHandel = (data: any) => {
     // :TODO 跳转到上传表单 根据id进行更新
+    router.push({ name: 'createComp', query: { compID: data.id } });
   };
 
   watch(
@@ -236,7 +237,7 @@
       });
       showColumns.value = cloneDeep(cloneColumns.value);
     },
-    { deep: true, immediate: true },
+    { deep: true, immediate: true }
   );
 </script>
 

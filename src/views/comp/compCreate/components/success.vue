@@ -6,7 +6,7 @@
       :subtitle="$t('stepForm.success.subTitle')"
     />
     <a-space :size="16">
-      <a-button key="view" type="primary">
+      <a-button key="view" type="primary" @click="viewDescHandel">
         {{ $t('stepForm.button.view') }}
       </a-button>
       <a-button key="again" type="secondary" @click="oneMore">
@@ -26,7 +26,18 @@
 </template>
 
 <script lang="ts" setup>
+  import { useRouter } from 'vue-router';
+
+  type Props = {
+    resId: string;
+  };
+  const props = defineProps<Props>();
   const emits = defineEmits(['changeStep']);
+  const router = useRouter();
+  const viewDescHandel = () => {
+    router.push({ name: 'compDesc', query: { compId: props.resId } });
+  };
+
   const oneMore = () => {
     emits('changeStep', 1);
   };

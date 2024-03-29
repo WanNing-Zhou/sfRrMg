@@ -27,12 +27,12 @@
     >
       <div style="width: 100%">
         <wq-upload
-          v-model="formData.previewUrl"
+          v-model="formData.preview_url"
           width="370"
           height="200"
           style="margin-bottom: 20px"
         ></wq-upload>
-        <a-input v-model="formData.previewUrl" placeholder="预览图地址" />
+        <a-input v-model="formData.preview_url" placeholder="预览图地址" />
       </div>
     </a-form-item>
     <a-form-item
@@ -85,21 +85,35 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { ref, watch } from 'vue';
   import { FormInstance } from '@arco-design/web-vue/es/form';
   import WqUpload from '@/components/uploadComp/wqUpload.vue';
   import { BaseInfoModel } from '@/api/form';
+
+  type Props = {
+    base: any;
+  };
+
+  const props = defineProps<Props>();
 
   const emits = defineEmits(['changeStep']);
   const formRef = ref<FormInstance>();
   const formData = ref<BaseInfoModel | any>({
     title: '',
     deploy: '',
-    previewUrl: '',
+    preview_url: '',
     info: '',
     column: 1, // 组件默认占列数
     row: 1, // 组件默认占行数
   });
+
+  watch(
+    props,
+    () => {
+      formData.value = props.base;
+    },
+    { deep: true, immediate: true }
+  );
 
   const onNextClick = async () => {
     const res = await formRef.value?.validate();

@@ -22,13 +22,18 @@
             </a-step>
           </a-steps>
           <keep-alive>
-            <BaseInfo v-if="step === 1" @change-step="changeStep" />
+            <BaseInfo
+              v-if="step === 1"
+              :base="submitModel"
+              @change-step="changeStep"
+            />
             <ChannelInfo
               v-else-if="step === 2"
+              :base="submitModel"
               :deploy="submitModel.deploy"
               @change-step="changeStep"
             />
-            <Success v-else-if="step === 3" @change-step="changeStep" />
+            <Success  v-else-if="step === 3" :res-id="resId" @change-step="changeStep" />
           </keep-alive>
         </div>
       </a-card>
@@ -37,14 +42,16 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { onMounted, ref } from 'vue';
+  import { useRoute } from 'vue-router';
   import useLoading from '@/hooks/loading';
+  import { BaseInfoModel, ChannelInfoModel } from '@/api/form';
   import {
-    BaseInfoModel,
-    ChannelInfoModel,
-    UnitChannelModel,
-  } from '@/api/form';
-  import { CompInfoModel, createNewComp } from '@/api/comp';
+    CompInfoModel,
+    getCompInfo,
+    createNewComp,
+    updateComp,
+  } from '@/api/comp';
   import BaseInfo from './components/base-info.vue';
   import ChannelInfo from './components/channel-info.vue';
   import Success from './components/success.vue';
@@ -53,10 +60,32 @@
   const step = ref(1);
   const submitModel = ref<CompInfoModel>({} as CompInfoModel);
 
+  const route = useRoute();
+  const compId = route.query.compID || '';
+  const fetchInfo = async () => {
+    const res = await getCompInfo({ id: compId as string });
+    submitModel.value = { ...res.data };
+  };
+
+  onMounted(() => {
+    if (compId) {
+      fetchInfo();
+      // return
+    }
+  });
+
+  const resId = ref('');
+
   const submitForm = async () => {
     setLoading(true);
     try {
-      await createNewComp(submitModel.value); // The mock api default success
+      let res;
+      if (compId) {
+        res = await updateComp(submitModel.value);
+      } else {
+        res = await createNewComp(submitModel.value); // The mock api default success
+      }
+      resId.value = res?.data?.id || '';
       step.value = 3;
       submitModel.value = {} as CompInfoModel; // init
     } catch (err) {
@@ -69,7 +98,7 @@
   // 步骤改变出发
   const changeStep = (
     direction: string | number,
-    model: BaseInfoModel | ChannelInfoModel,
+    model: BaseInfoModel | ChannelInfoModel
   ) => {
     if (typeof direction === 'number') {
       step.value = direction;

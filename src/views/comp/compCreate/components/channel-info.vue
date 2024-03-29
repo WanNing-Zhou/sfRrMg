@@ -58,7 +58,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
+  import { ref, watch } from 'vue';
   import { FormInstance } from '@arco-design/web-vue/es/form';
   import { ChannelInfoModel } from '@/api/form';
   import WqUpload from '@/components/uploadComp/wqUpload.vue';
@@ -67,6 +67,7 @@
 
   type Props = {
     deploy: 'userUrl' | 'uploadUrl'; // 上传方式
+    base: any;
   };
 
   const props = defineProps<Props>();
@@ -77,6 +78,15 @@
   const formData = ref({
     url: '',
   });
+
+
+  watch(
+    props.base,
+    (newValue) => {
+      formData.value = newValue as any;
+    },
+    { deep: true, immediate: true }
+  );
 
   const onNextClick = async () => {
     const res = await formRef.value?.validate();
