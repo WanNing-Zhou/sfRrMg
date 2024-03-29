@@ -11,7 +11,7 @@ import {
 import { setToken, clearToken } from '@/utils/auth';
 import { removeRouteListener } from '@/utils/route-listener';
 import { RegisterData, ResetPasswordData } from '@/types/form';
-import { Message, Modal } from "@arco-design/web-vue";
+import { Message, Modal } from '@arco-design/web-vue';
 import { UserState } from './types';
 import useAppStore from '../app';
 

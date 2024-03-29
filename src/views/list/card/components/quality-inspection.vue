@@ -74,7 +74,7 @@
   const defaultValue: ServiceRecord[] = new Array(3).fill({});
   const { loading, response: renderData } = useRequest<ServiceRecord[]>(
     queryInspectionList,
-    defaultValue
+    defaultValue,
   );
 </script>
 

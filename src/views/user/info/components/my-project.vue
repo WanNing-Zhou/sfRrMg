@@ -53,7 +53,7 @@
   const defaultValue = Array(6).fill({} as MyProjectRecord);
   const { loading, response: projectList } = useRequest<MyProjectRecord[]>(
     queryMyProjectList,
-    defaultValue
+    defaultValue,
   );
 </script>
 

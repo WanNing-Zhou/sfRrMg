@@ -18,7 +18,8 @@
         说明
       </a-typography-title>
       <a-typography-paragraph style="margin-bottom: 0">
-        创建完成的组件, 需要等待管理人员进一步审核, 审核通过后, 才能使用, 感谢您的理解
+        创建完成的组件, 需要等待管理人员进一步审核, 审核通过后, 才能使用,
+        感谢您的理解
       </a-typography-paragraph>
     </div>
   </div>

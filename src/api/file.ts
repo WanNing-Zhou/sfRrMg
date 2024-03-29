@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export function fileUpload(formData: any) {
   console.log('卡卡西');
-  const url = import.meta.env.VITE_API_UPLOAD_BASE
+  const url = import.meta.env.VITE_API_UPLOAD_BASE;
   console.log(url);
   return axios(`${import.meta.env.VITE_API_UPLOAD_BASE}file`, {
     method: 'post',

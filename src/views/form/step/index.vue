@@ -64,7 +64,7 @@
   };
   const changeStep = (
     direction: string | number,
-    model: BaseInfoModel | ChannelInfoModel
+    model: BaseInfoModel | ChannelInfoModel,
   ) => {
     if (typeof direction === 'number') {
       step.value = direction;

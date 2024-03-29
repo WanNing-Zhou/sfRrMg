@@ -50,7 +50,7 @@
   const defaultValue: ServiceRecord[] = new Array(4).fill({});
   const { loading, response: renderData } = useRequest<ServiceRecord[]>(
     queryTheServiceList,
-    defaultValue
+    defaultValue,
   );
 </script>
 

@@ -40,8 +40,8 @@ const COMP: AppRouteRecordRaw = {
         requiresAuth: false,
         roles: ['*'],
         hideInMenu: true,
-      }
-    }
+      },
+    },
   ],
 };
 

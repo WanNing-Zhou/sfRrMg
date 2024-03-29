@@ -44,7 +44,7 @@
   const defaultValue: ServiceRecord[] = new Array(6).fill({});
   const { loading, response: renderData } = useRequest<ServiceRecord[]>(
     queryRulesPresetList,
-    defaultValue
+    defaultValue,
   );
 </script>
 

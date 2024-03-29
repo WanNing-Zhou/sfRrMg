@@ -27,7 +27,6 @@
                   已上架
                 </template>
               </div>
-
             </a-col>
             <a-col :span="12">
               <div>组件预览图:</div>
@@ -54,7 +53,7 @@
             <a-col>
               <div style="display: flex">
                 <span>简介:</span>
-                <span>{{data.info}}</span>
+                <span>{{ data.info }}</span>
               </div>
             </a-col>
           </a-row>

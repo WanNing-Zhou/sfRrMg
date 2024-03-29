@@ -153,7 +153,7 @@
             <img alt="avatar" :src="avatar" />
           </a-avatar>
           <template #content>
-<!--            <a-doption>
+            <!--            <a-doption>
               <a-space @click="switchRoles">
                 <icon-tag />
                 <span>

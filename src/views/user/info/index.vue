@@ -2,7 +2,7 @@
   <div class="container">
     <Breadcrumb :items="['menu.user', 'menu.user.info']" />
     <UserInfoHeader />
-<!--    <div class="content">
+    <!--    <div class="content">
       <div class="content-left">
         <a-grid :cols="24" :col-gap="16" :row-gap="16">
           <a-grid-item :span="24">

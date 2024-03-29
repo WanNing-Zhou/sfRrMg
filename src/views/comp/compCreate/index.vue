@@ -23,7 +23,11 @@
           </a-steps>
           <keep-alive>
             <BaseInfo v-if="step === 1" @change-step="changeStep" />
-            <ChannelInfo v-else-if="step === 2" :deploy="submitModel.deploy" @change-step="changeStep" />
+            <ChannelInfo
+              v-else-if="step === 2"
+              :deploy="submitModel.deploy"
+              @change-step="changeStep"
+            />
             <Success v-else-if="step === 3" @change-step="changeStep" />
           </keep-alive>
         </div>
@@ -65,7 +69,7 @@
   // 步骤改变出发
   const changeStep = (
     direction: string | number,
-    model: BaseInfoModel | ChannelInfoModel
+    model: BaseInfoModel | ChannelInfoModel,
   ) => {
     if (typeof direction === 'number') {
       step.value = direction;

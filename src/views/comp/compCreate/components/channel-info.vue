@@ -7,7 +7,7 @@
     :wrapper-col-props="{ span: 18 }"
   >
     <a-form-item
-      v-if="deploy==='userUrl'"
+      v-if="deploy === 'userUrl'"
       field="url"
       label="组件"
       :rules="[
@@ -63,7 +63,7 @@
   import { ChannelInfoModel } from '@/api/form';
   import WqUpload from '@/components/uploadComp/wqUpload.vue';
   import compressedImg from '@/assets/images/upload-compressed.png';
-  import { compUpload, fileUpload } from "@/api/file";
+  import { compUpload, fileUpload } from '@/api/file';
 
   type Props = {
     deploy: 'userUrl' | 'uploadUrl'; // 上传方式
@@ -88,7 +88,7 @@
     emits('changeStep', 'backward');
   };
 
-  const submitComp = async (file: File) =>{
+  const submitComp = async (file: File) => {
     if (file) {
       const form = new FormData();
       form.append('files', file);
@@ -99,8 +99,7 @@
       return url;
     }
     return '';
-  }
-
+  };
 </script>
 
 <style scoped lang="less">

@@ -50,8 +50,8 @@
 <script lang="ts" setup>
   import { onMounted } from 'vue';
   import { useUserStore } from '@/store';
-  import { formatToDay } from "@/utils/day";
-  import defaultAvatar from '@/assets/images/user-defalut-avatar.png'
+  import { formatToDay } from '@/utils/day';
+  import defaultAvatar from '@/assets/images/user-defalut-avatar.png';
 
   const userInfo = useUserStore();
   onMounted(() => {

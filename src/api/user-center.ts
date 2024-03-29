@@ -82,7 +82,7 @@ export function userUploadApi(
   config?: {
     controller: AbortController;
     onUploadProgress?: (progressEvent: any) => void;
-  }
+  },
 ) {
   // const controller = new AbortController();
   const uploadUrl = import.meta.env.VITE_API_UPLOAD_URL;

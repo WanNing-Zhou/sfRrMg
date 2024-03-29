@@ -27,7 +27,6 @@
   import LoginBanner from './components/banner.vue';
   import LoginForm from './components/login-form.vue';
 
-
   // 注册表单显示
   const registerFromVisible = ref(false);
 

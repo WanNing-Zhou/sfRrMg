@@ -54,7 +54,7 @@
   import { FormInstance } from '@arco-design/web-vue/es/form';
   import { BasicInfoModel } from '@/api/user-center';
   import { useUserStore } from '@/store';
-  import { Message, Modal } from "@arco-design/web-vue";
+  import { Message, Modal } from '@arco-design/web-vue';
 
   const userStore = useUserStore();
   const formRef = ref<FormInstance>();

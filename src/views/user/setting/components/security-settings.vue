@@ -21,7 +21,7 @@
         </template>
       </a-list-item-meta>
     </a-list-item>
-<!--    <a-list-item>
+    <!--    <a-list-item>
       <a-list-item-meta>
         <template #avatar>
           <a-typography-paragraph>
@@ -91,19 +91,18 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from "vue";
-import UpdatePassword from "@/views/user/setting/components/update-password.vue";
+  import { reactive, ref } from 'vue';
+  import UpdatePassword from '@/views/user/setting/components/update-password.vue';
 
-const dialogs = reactive({
-  updatePassword: false
-})
-//  点击处理
-const linkHandle = (word: string) =>{
-  if (word === "updatePassword"){
-    dialogs.updatePassword = true
-  }
-}
-
+  const dialogs = reactive({
+    updatePassword: false,
+  });
+  //  点击处理
+  const linkHandle = (word: string) => {
+    if (word === 'updatePassword') {
+      dialogs.updatePassword = true;
+    }
+  };
 </script>
 
 <style scoped lang="less">

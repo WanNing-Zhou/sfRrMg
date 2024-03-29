@@ -98,7 +98,7 @@
   import { useUserStore } from '@/store';
   import useLoading from '@/hooks/loading';
   import type { LoginData } from '@/api/user';
-  import { RegisterData } from "@/types/form";
+  import { RegisterData } from '@/types/form';
 
   const router = useRouter();
   const { t } = useI18n();
@@ -130,9 +130,9 @@
     values: Record<string, any>;
   }) => {
     if (loading.value) return;
-    if(rePassword.value !== userInfo.password){
-      Message.error(t('login.form.rePassword.notMatch'))
-      return
+    if (rePassword.value !== userInfo.password) {
+      Message.error(t('login.form.rePassword.notMatch'));
+      return;
     }
     if (!errors) {
       setLoading(true);

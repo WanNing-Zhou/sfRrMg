@@ -44,7 +44,7 @@
         row-key="id"
         :loading="loading"
         :pagination="pagination"
-        :columns="(cloneColumns as TableColumnData[])"
+        :columns="cloneColumns as TableColumnData[]"
         :data="renderData"
         :bordered="false"
         :size="size"
@@ -80,8 +80,12 @@
           </template>
         </template>
         <template #operations="{ record }">
-          <a-button type="text" size="small" @click="detailHandel(record)"> 详情 </a-button>
-          <a-button type="text" size="small" @click="updateHandel(record)"> 更新 </a-button>
+          <a-button type="text" size="small" @click="detailHandel(record)">
+            详情
+          </a-button>
+          <a-button type="text" size="small" @click="updateHandel(record)">
+            更新
+          </a-button>
         </template>
       </a-table>
     </a-card>
@@ -99,7 +103,7 @@
   import { useUserStore } from '@/store';
   import { getCompList } from '@/api/comp';
   import { formatToDay } from '@/utils/day';
-  import { useRouter } from "vue-router";
+  import { useRouter } from 'vue-router';
 
   type SizeProps = 'mini' | 'small' | 'medium' | 'large';
   type Column = TableColumnData & { checked?: true };
@@ -175,13 +179,13 @@
 
   const userStore = useUserStore();
   const fetchData = async (
-    params: PolicyParams | any = { current: 1, pageSize: 20 }
+    params: PolicyParams | any = { current: 1, pageSize: 20 },
   ) => {
     setLoading(true);
     try {
       const form = { ...params };
-      if(!userStore.id){
-        await userStore.info()
+      if (!userStore.id) {
+        await userStore.info();
       }
       form.createId = userStore.id;
       form.page = params.current;
@@ -211,18 +215,17 @@
     formModel.value = generateFormModel();
   };
 
-  const router = useRouter()
+  const router = useRouter();
   // 用于展示详情信息
   const detailHandel = (data: any) => {
     // 跳转到详情页面
     // 根据id查询详细信息
-    router.push({name: 'compDesc', query: {compId: data.id}})
-  }
+    router.push({ name: 'compDesc', query: { compId: data.id } });
+  };
 
   const updateHandel = (data: any) => {
     // :TODO 跳转到上传表单 根据id进行更新
-  }
-
+  };
 
   watch(
     () => columns.value,
@@ -233,7 +236,7 @@
       });
       showColumns.value = cloneDeep(cloneColumns.value);
     },
-    { deep: true, immediate: true }
+    { deep: true, immediate: true },
   );
 </script>
 

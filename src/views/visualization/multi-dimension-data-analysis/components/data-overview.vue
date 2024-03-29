@@ -52,7 +52,7 @@
           }" class="tooltip-item-icon"></span><span>${el.seriesName}</span>
         </p>
         <span class="tooltip-value">${el.value.toLocaleString()}</span>
-      </div>`
+      </div>`,
       )
       .reverse()
       .join('');
@@ -62,7 +62,7 @@
     name: string,
     lineColor: string,
     itemBorderColor: string,
-    data: number[]
+    data: number[],
   ): LineSeriesOption => {
     return {
       name,
@@ -237,25 +237,25 @@
           '内容生产量',
           '#722ED1',
           '#F5E8FF',
-          contentProductionData.value
+          contentProductionData.value,
         ),
         generateSeries(
           '内容点击量',
           '#F77234',
           '#FFE4BA',
-          contentClickData.value
+          contentClickData.value,
         ),
         generateSeries(
           '内容曝光量',
           '#33D1C9',
           '#E8FFFB',
-          contentExposureData.value
+          contentExposureData.value,
         ),
         generateSeries(
           '活跃用户数',
           '#3469FF',
           '#E8F3FF',
-          activeUsersData.value
+          activeUsersData.value,
         ),
       ],
     };

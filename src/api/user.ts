@@ -1,7 +1,7 @@
 import axios from 'axios';
 import type { RouteRecordNormalized } from 'vue-router';
 import { UserState } from '@/store/modules/user/types';
-import { RegisterData, ResetPasswordData } from "@/types/form";
+import { RegisterData, ResetPasswordData } from '@/types/form';
 
 export interface LoginData {
   username: string;
@@ -12,7 +12,7 @@ export interface LoginRes {
   access_token: string;
 }
 
-export interface RegisterRes{
+export interface RegisterRes {
   access_token: string;
 }
 
@@ -21,8 +21,8 @@ export function login(data: LoginData) {
   return axios.post<LoginRes>('/api/auth/login', data);
 }
 
-export function register(form: RegisterData){
-  return axios.post<RegisterRes>('/api/auth/register', form)
+export function register(form: RegisterData) {
+  return axios.post<RegisterRes>('/api/auth/register', form);
 }
 
 export function logout() {
@@ -41,6 +41,6 @@ export function setUserInfo(form: UserState) {
   return axios.post<UserState>('/api/auth/info', form);
 }
 
-export function confirmPassword(from: ResetPasswordData){
-  return axios.post<UserState>( '/api/auth/password',from)
+export function confirmPassword(from: ResetPasswordData) {
+  return axios.post<UserState>('/api/auth/password', from);
 }
