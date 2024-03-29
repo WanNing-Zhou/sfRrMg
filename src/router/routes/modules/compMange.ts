@@ -32,6 +32,16 @@ const COMP: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
+    {
+      path: 'desc',
+      name: 'compDesc',
+      component: () => import('@/views/comp/compDesc/index.vue'),
+      meta: {
+        requiresAuth: false,
+        roles: ['*'],
+        hideInMenu: true,
+      }
+    }
   ],
 };
 

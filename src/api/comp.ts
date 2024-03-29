@@ -9,6 +9,10 @@ export interface CompInfoModel {
   previewUrl: string; // 组件预览图片
   url: string; // 组件地址
   types?: string[]; // 组件标签
+  preview_url?: string; // 组件预览图片
+  create_id?: string; // 创建人id
+  created_at?: string; // 创建时间
+  updated_at?: string; // 更新时间
 }
 
 /**
@@ -32,4 +36,8 @@ type SearchComps = {
  */
 export function getCompList(data: SearchComps) {
   return axios.get('/api/comp/list', { params: data });
+}
+
+export function getCompInfo(data: { id: string }) {
+  return axios.get('/api/comp/info', { params: data });
 }

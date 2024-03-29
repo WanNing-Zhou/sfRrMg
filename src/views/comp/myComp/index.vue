@@ -99,6 +99,7 @@
   import { useUserStore } from '@/store';
   import { getCompList } from '@/api/comp';
   import { formatToDay } from '@/utils/day';
+  import { useRouter } from "vue-router";
 
   type SizeProps = 'mini' | 'small' | 'medium' | 'large';
   type Column = TableColumnData & { checked?: true };
@@ -210,49 +211,12 @@
     formModel.value = generateFormModel();
   };
 
-  const handleSelectDensity = (
-    val: string | number | Record<string, any> | undefined,
-    e: Event
-  ) => {
-    size.value = val as SizeProps;
-  };
-
-  const handleChange = (
-    checked: boolean | (string | boolean | number)[],
-    column: Column,
-    index: number
-  ) => {
-    if (!checked) {
-      cloneColumns.value = showColumns.value.filter(
-        (item) => item.dataIndex !== column.dataIndex
-      );
-    } else {
-      cloneColumns.value.splice(index, 0, column);
-    }
-  };
-
-  const exchangeArray = <T extends Array<any>>(
-    array: T,
-    beforeIdx: number,
-    newIdx: number,
-    isDeep = false
-  ): T => {
-    const newArray = isDeep ? cloneDeep(array) : array;
-    if (beforeIdx > -1 && newIdx > -1) {
-      // 先替换后面的，然后拿到替换的结果替换前面的
-      newArray.splice(
-        beforeIdx,
-        1,
-        newArray.splice(newIdx, 1, newArray[beforeIdx]).pop()
-      );
-    }
-    return newArray;
-  };
-
+  const router = useRouter()
   // 用于展示详情信息
   const detailHandel = (data: any) => {
     // 跳转到详情页面
     // 根据id查询详细信息
+    router.push({name: 'compDesc', query: {compId: data.id}})
   }
 
   const updateHandel = (data: any) => {

@@ -2,6 +2,7 @@ export default {
   'menu.doc': '开发者文档',
   'menu.comp': '组件管理',
   'menu.comp.myComp': '我的组件',
+  'menu.comp.desc': '组件详情',
   'menu.list.searchTable': '查询表格',
   'searchTable.form.number': '集合编号',
   'searchTable.form.number.placeholder': '请输入集合编号',
