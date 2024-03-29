@@ -26,7 +26,7 @@ export function register(form: RegisterData) {
 }
 
 export function logout() {
-  return axios.post<LoginRes>('/api/user/logout');
+  return axios.post<LoginRes>('/api/auth/logout');
 }
 
 export function getUserInfo() {
