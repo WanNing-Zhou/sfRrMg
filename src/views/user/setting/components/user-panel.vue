@@ -152,7 +152,7 @@
     userStore.$patch({
       avatar: url,
     });
-    console.log(userStore.avatar);
+    // console.log(userStore.avatar);
     await userStore.updateInfo(); // 更新用户信息
     // console.log('success', url);
     // userStore.setInfo()
