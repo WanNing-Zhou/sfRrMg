@@ -2,8 +2,11 @@
   <div class="container">
     <div class="logo">
       <img
+        width="33"
+        height="33"
+
         alt="logo"
-        src="//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/dfdba5317c0c20ce20e64fac803d52bc.svg~tplv-49unhts6dw-image.image"
+        :src="logoImg"
       />
       <div class="logo-text">可扩展式前端应用系统</div>
     </div>
@@ -24,8 +27,10 @@
   import { ref } from 'vue';
   import Footer from '@/components/footer/index.vue';
   import RegisterForm from '@/views/login/components/register-form.vue';
+  import logoImg from '@/assets/logo.png'
   import LoginBanner from './components/banner.vue';
   import LoginForm from './components/login-form.vue';
+
 
   // 注册表单显示
   const registerFromVisible = ref(false);

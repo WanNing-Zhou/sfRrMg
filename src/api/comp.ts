@@ -13,6 +13,7 @@ export interface CompInfoModel {
   create_id?: string; // 创建人id
   created_at?: string; // 创建时间
   updated_at?: string; // 更新时间
+  is_list?: number; // 组件状态
 }
 
 /**

@@ -26,6 +26,10 @@
                   <span class="circle pass"></span>
                   已上架
                 </template>
+                <template v-else-if="data.is_list === 3">
+                  <span class="circle pass"></span>
+                  待上架
+                </template>
               </div>
             </a-col>
             <a-col :span="12">
@@ -40,7 +44,7 @@
               <div
                 >组件访问地址: {{ data.url }}
                 <a-button type="text" @click="jump(data.url)"
-                  >访问</a-button
+                  >测试</a-button
                 ></div
               >
             </a-col>
@@ -85,7 +89,13 @@
   };
 
   const jump = (url: string) => {
-    window.open(url, '_blank');
+    const devUrl = import.meta.env.VITE_API_DEV_TOOL_URL;
+    if (devUrl) {
+      window.open(`${devUrl}?url=${url}`, '_blank');
+      // return
+    } else {
+      window.open(url, '_blank');
+    }
   };
 
   onMounted(() => {

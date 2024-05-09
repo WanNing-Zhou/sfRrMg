@@ -1,7 +1,7 @@
 export default {
   'login.form.btn.register': '注册',
   'login.form.btn.login': '登录',
-  'login.form.title': '登录 可扩展式应用系统',
+  'login.form.title': '登录 可扩展式应用系统 开发者中心',
   'login.form.userName.errMsg': '用户名不能为空',
   'login.form.email.errMsg': '邮箱不能为空',
   'login.form.password.errMsg': '密码不能为空',
